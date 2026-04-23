@@ -251,6 +251,7 @@ footer {
   align-items: center;
   min-height: 100vh;
   padding: 40px 0;
+  margin-top: 30px; /* ヘッダーの高さ分の余白を確保 */
 }
 
 .profile-container {
@@ -338,7 +339,7 @@ footer {
 .profile-name {
   font-size: 3rem;
   color: var(--heading-color);
-  margin-bottom: 40px;
+  margin-bottom: 0px;
   letter-spacing: 2px;
 }
 
@@ -356,7 +357,7 @@ footer {
   flex: 1;
   display: flex;
   flex-direction: column;
-  gap: 40px;
+  gap: 8px;
 }
 
 /* 変更点: 右カラム（一問一答）のラッパー要素を追加 */
@@ -371,6 +372,7 @@ footer {
   flex: 1;
   display: flex;
   flex-direction: column;
+  padding-top: 0px !important;
 }
 
 /* 変更点: Chart.jsのキャンバスをレスポンシブに保つためのコンテナ */
@@ -391,7 +393,8 @@ footer {
   background: var(--bg-color);
   padding: 40px;
   /* 変更点: 両方のカードが常に同じ高さを保ち、十分なサイズを持つように最小高さを設定 */
-  min-height: 380px;
+  min-height: 200px;
+  max-height: 380px;
   flex: 1;
 }
 
