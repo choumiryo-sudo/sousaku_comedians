@@ -351,14 +351,9 @@ footer {
 
 .profile-card {
   background: var(--bg-color);
-  border-radius: 20px;
-  /* 変更点: サイズアップのため、内側の余白(padding)を30pxから40pxに拡大 */
   padding: 40px;
   /* 変更点: 両方のカードが常に同じ高さを保ち、十分なサイズを持つように最小高さを設定 */
   min-height: 380px;
-  box-shadow:
-    10px 10px 20px var(--shadow-dark),
-    -10px -10px 20px var(--shadow-light);
   flex: 1;
 }
 
@@ -388,20 +383,14 @@ footer {
   font-weight: bold;
   color: var(--heading-color);
   margin-top: 10px;
-}
-.profile-qa dt::before {
-  content: "Q. ";
-  color: #a8c0d5; /* アクセントカラー */
+  font-weight: lighter;
 }
 .profile-qa dd {
   margin-left: 0;
   /* 変更点: 行数を稼ぎつつ見やすくするため、回答下の余白を5pxから15pxに拡大 */
   margin-bottom: 15px;
   color: var(--text-color);
-}
-.profile-qa dd::before {
-  content: "A. ";
-  color: #888;
+  margin-top: 10px;
 }
 
 /* --- ナビゲーション矢印 --- */
