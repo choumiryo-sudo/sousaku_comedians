@@ -20,6 +20,8 @@ if (menuBtn && navMenu) {
 
 // 変更点: 一問一答を10行程度にするため、全員の 'qa' データを5問ずつ（QとAで計10行）に増量しました。
 // 自己紹介（intro）の文章量もそれに合わせて少し長めに調整しています。
+// 変更点: 各個人のデータにレーダーチャート用の 'stats' プロパティを追加しました。
+// 値の順番は ['Design', 'Logic', 'Communication', 'Speed', 'Creativity'] です。
 const profiles = [
   {
     id: 0,
@@ -27,6 +29,7 @@ const profiles = [
     role: "UI/UX Designer",
     img: "https://picsum.photos/400/500?random=10",
     theme: "#a8c0d5",
+    stats: [95, 60, 80, 75, 90],
     intro:
       "シンプルで直感的なUIデザインを得意としています。ユーザーの心理を第一に考え、触れていて心地よいインターフェースの追求を日々の目標にしています。休日は美術館巡りをしてインスピレーションを得ています。",
     qa: [
@@ -43,6 +46,7 @@ const profiles = [
     role: "Front-end Developer",
     img: "https://picsum.photos/400/500?random=11",
     theme: "#d5a8b0",
+    stats: [70, 95, 75, 90, 80],
     intro:
       "デザイナーの意図を完璧にブラウザ上で再現します。特にアニメーションの実装やパフォーマンスチューニングにこだわりを持っています。最近はWebGL表現に夢中です。",
     qa: [
@@ -59,6 +63,7 @@ const profiles = [
     role: "Project Manager",
     img: "https://picsum.photos/400/500?random=12",
     theme: "#b0d5a8",
+    stats: [60, 80, 95, 85, 70],
     intro:
       "プロジェクトの進行管理とクライアントとの折衝を担当しています。チーム全員が最高のパフォーマンスを発揮できるよう、環境づくりとタスク管理を徹底しています。",
     qa: [
@@ -75,6 +80,7 @@ const profiles = [
     role: "Backend Engineer",
     img: "https://picsum.photos/400/500?random=13",
     theme: "#e6c888",
+    stats: [50, 95, 65, 80, 70],
     intro:
       "見えない裏側から、安全で高速なシステムを支えます。大規模トラフィックを捌くインフラ設計が得意です。プライベートでは自作PCの構成を考えるのが好きです。",
     qa: [
@@ -91,6 +97,7 @@ const profiles = [
     role: "Art Director",
     img: "https://picsum.photos/400/500?random=14",
     theme: "#d2b4de",
+    stats: [95, 55, 85, 70, 100],
     intro:
       "プロジェクト全体のビジュアルトーンを決定し、品質を担保します。クライアントの抽象的な要望を、具体的な形に落とし込むプロセスにやりがいを感じています。",
     qa: [
@@ -107,6 +114,7 @@ const profiles = [
     role: "Data Analyst",
     img: "https://picsum.photos/400/500?random=15",
     theme: "#88e6d9",
+    stats: [60, 100, 75, 85, 70],
     intro:
       "データからユーザーの行動を読み解き、ロジカルな改善案を提案します。数字の裏にある「ユーザーの本当の気持ち」を見つけ出すことが私のミッションです。",
     qa: [
@@ -123,6 +131,7 @@ const profiles = [
     role: "Digital Marketer",
     img: "https://picsum.photos/400/500?random=16",
     theme: "#e69b88",
+    stats: [75, 75, 90, 80, 85],
     intro:
       "魅力的なプロダクトを、必要としている人に正しく届けます。SNSマーケティングから広告運用まで幅広く担当し、ブランドのファン作りを加速させます。",
     qa: [
@@ -139,6 +148,7 @@ const profiles = [
     role: "QA Engineer",
     img: "https://picsum.photos/400/500?random=17",
     theme: "#b0b5be",
+    stats: [65, 90, 80, 75, 60],
     intro:
       "少しのバグも見逃さず、品質の最後の砦として活躍します。あらゆるエッジケースを想定したテストシナリオを作成し、ユーザーに安心を届けます。",
     qa: [
@@ -186,6 +196,68 @@ if (
     currentIndex = 0;
   }
 
+  // 変更点: Chart.jsのインスタンスを保持する変数
+  let radarChart;
+
+  // 変更点: レーダーチャートを初期化する関数
+  function initChart() {
+    const ctx = document.getElementById("profile-radar-chart").getContext("2d");
+
+    // Chart.js のグローバルフォント設定
+    Chart.defaults.font.family =
+      "'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif";
+    Chart.defaults.color = "#888";
+
+    radarChart = new Chart(ctx, {
+      type: "radar",
+      data: {
+        labels: ["Design", "Logic", "Communication", "Speed", "Creativity"],
+        datasets: [
+          {
+            label: "Status",
+            data: [], // データは切り替え時にセット
+            backgroundColor: "rgba(0,0,0,0.2)", // 仮の色
+            borderColor: "#000", // 仮の色
+            borderWidth: 2,
+            pointBackgroundColor: "#fff",
+            pointBorderColor: "#000", // 仮の色
+            pointBorderWidth: 2,
+            pointRadius: 4,
+          },
+        ],
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        scales: {
+          r: {
+            min: 0,
+            max: 100,
+            ticks: { display: false, stepSize: 20 },
+            grid: { color: "rgba(0, 0, 0, 0.05)" },
+            angleLines: { color: "rgba(0, 0, 0, 0.05)" },
+            pointLabels: {
+              font: { size: 12, weight: "bold" },
+              color: "#555",
+            },
+          },
+        },
+        plugins: {
+          legend: { display: false },
+          tooltip: { enabled: false }, // 見た目重視のためツールチップはオフ
+        },
+      },
+    });
+  }
+
+  // 変更点: テーマカラー(16進数)をrgba(半透明)に変換するヘルパー関数
+  function hexToRgba(hex, alpha) {
+    const r = parseInt(hex.slice(1, 3), 16);
+    const g = parseInt(hex.slice(3, 5), 16);
+    const b = parseInt(hex.slice(5, 7), 16);
+    return `rgba(${r}, ${g}, ${b}, ${alpha})`;
+  }
+
   // DOMにデータをセットする関数（アニメーション無し）
   function setProfileData(index) {
     const p = profiles[index];
@@ -205,25 +277,35 @@ if (
     });
   }
 
-  // 初回読み込み時は即座にデータをセット
-  setProfileData(currentIndex);
-
-  // 矢印ボタンで切り替える際の関数（フェードアニメーション有り）
-  function transitionProfile(index) {
-    content.classList.add("fade-out");
-    setTimeout(() => {
-      setProfileData(index);
-      content.classList.remove("fade-out");
-    }, 400); // CSSのtransition時間と合わせる
+  // 変更点: チャートのデータと色を、人物のテーマカラーに合わせて更新します
+  if (radarChart) {
+    radarChart.data.datasets[0].data = p.stats;
+    radarChart.data.datasets[0].backgroundColor = hexToRgba(p.theme, 0.4); // 塗りつぶしは半透明
+    radarChart.data.datasets[0].borderColor = p.theme;
+    radarChart.data.datasets[0].pointBorderColor = p.theme;
+    radarChart.update();
   }
-
-  btnNext.addEventListener("click", () => {
-    currentIndex = (currentIndex + 1) % profiles.length;
-    transitionProfile(currentIndex);
-  });
-
-  btnPrev.addEventListener("click", () => {
-    currentIndex = (currentIndex - 1 + profiles.length) % profiles.length;
-    transitionProfile(currentIndex);
-  });
 }
+
+// 変更点: ページ読み込み時にチャートを初期化
+initChart();
+setProfileData(currentIndex);
+
+// 矢印ボタンで切り替える際の関数（フェードアニメーション有り）
+function transitionProfile(index) {
+  content.classList.add("fade-out");
+  setTimeout(() => {
+    setProfileData(index);
+    content.classList.remove("fade-out");
+  }, 400); // CSSのtransition時間と合わせる
+}
+
+btnNext.addEventListener("click", () => {
+  currentIndex = (currentIndex + 1) % profiles.length;
+  transitionProfile(currentIndex);
+});
+
+btnPrev.addEventListener("click", () => {
+  currentIndex = (currentIndex - 1 + profiles.length) % profiles.length;
+  transitionProfile(currentIndex);
+});
