@@ -201,7 +201,11 @@ if (
 
   // 変更点: レーダーチャートを初期化する関数
   function initChart() {
-    const ctx = document.getElementById("profile-radar-chart").getContext("2d");
+    const canvas = document.getElementById("profile-radar-chart");
+    if (!canvas || typeof Chart === "undefined") {
+      return;
+    }
+    const ctx = canvas.getContext("2d");
 
     // Chart.js のグローバルフォント設定
     Chart.defaults.font.family =
@@ -275,37 +279,43 @@ if (
       elQa.appendChild(dt);
       elQa.appendChild(dd);
     });
+
+    updateRadarChart(p);
   }
 
   // 変更点: チャートのデータと色を、人物のテーマカラーに合わせて更新します
-  if (radarChart) {
-    radarChart.data.datasets[0].data = p.stats;
-    radarChart.data.datasets[0].backgroundColor = hexToRgba(p.theme, 0.4); // 塗りつぶしは半透明
-    radarChart.data.datasets[0].borderColor = p.theme;
-    radarChart.data.datasets[0].pointBorderColor = p.theme;
+  function updateRadarChart(profile) {
+    if (!radarChart) {
+      return;
+    }
+
+    radarChart.data.datasets[0].data = profile.stats;
+    radarChart.data.datasets[0].backgroundColor = hexToRgba(profile.theme, 0.4); // 塗りつぶしは半透明
+    radarChart.data.datasets[0].borderColor = profile.theme;
+    radarChart.data.datasets[0].pointBorderColor = profile.theme;
     radarChart.update();
   }
+
+  // 変更点: ページ読み込み時にチャートを初期化
+  initChart();
+  setProfileData(currentIndex);
+
+  // 矢印ボタンで切り替える際の関数（フェードアニメーション有り）
+  function transitionProfile(index) {
+    content.classList.add("fade-out");
+    setTimeout(() => {
+      setProfileData(index);
+      content.classList.remove("fade-out");
+    }, 400); // CSSのtransition時間と合わせる
+  }
+
+  btnNext.addEventListener("click", () => {
+    currentIndex = (currentIndex + 1) % profiles.length;
+    transitionProfile(currentIndex);
+  });
+
+  btnPrev.addEventListener("click", () => {
+    currentIndex = (currentIndex - 1 + profiles.length) % profiles.length;
+    transitionProfile(currentIndex);
+  });
 }
-
-// 変更点: ページ読み込み時にチャートを初期化
-initChart();
-setProfileData(currentIndex);
-
-// 矢印ボタンで切り替える際の関数（フェードアニメーション有り）
-function transitionProfile(index) {
-  content.classList.add("fade-out");
-  setTimeout(() => {
-    setProfileData(index);
-    content.classList.remove("fade-out");
-  }, 400); // CSSのtransition時間と合わせる
-}
-
-btnNext.addEventListener("click", () => {
-  currentIndex = (currentIndex + 1) % profiles.length;
-  transitionProfile(currentIndex);
-});
-
-btnPrev.addEventListener("click", () => {
-  currentIndex = (currentIndex - 1 + profiles.length) % profiles.length;
-  transitionProfile(currentIndex);
-});

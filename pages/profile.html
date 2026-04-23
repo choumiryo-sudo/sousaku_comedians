@@ -46,23 +46,37 @@
           <h1 class="profile-name" id="profile-name">Sarah Jenkins</h1>
 
           <div class="profile-details">
-            <div class="profile-card">
-              <h3>Memo</h3>
-              <p id="profile-intro">
-                シンプルで直感的なUIデザインを得意としています。ユーザーの心理を第一に考え、触れていて心地よいインターフェースの追求を日々の目標にしています。休日は美術館巡りをしてインスピレーションを得ています。
-              </p>
+            <div class="profile-col-left">
+              <div class="profile-card">
+                <h3>Memo</h3>
+                <p id="profile-intro">
+                  シンプルで直感的なUIデザインを得意としています。ユーザーの心理を第一に考え、触れていて心地よいインターフェースの追求を日々の目標にしています。休日は美術館巡りをしてインスピレーションを得ています。
+                </p>
+              </div>
+
+              <div class="profile-card profile-chart-card">
+                <h3>Status</h3>
+                <div class="chart-container">
+                  <canvas
+                    id="profile-radar-chart"
+                    aria-label="能力レーダーチャート"
+                  ></canvas>
+                </div>
+              </div>
             </div>
 
-            <div class="profile-card profile-qa">
-              <h3>Profile</h3>
-              <dl id="profile-qa-list">
-                <dt>趣味やマイブームは？</dt>
-                <dd>カフェでのスケッチです。</dd>
-                <dt>仕事で大切にしていること</dt>
-                <dd>チーム内の密なコミュニケーション。</dd>
-                <dt>好きな言葉</dt>
-                <dd>神は細部に宿る</dd>
-              </dl>
+            <div class="profile-col-right">
+              <div class="profile-card profile-qa">
+                <h3>Profile</h3>
+                <dl id="profile-qa-list">
+                  <dt>趣味やマイブームは？</dt>
+                  <dd>カフェでのスケッチです。</dd>
+                  <dt>仕事で大切にしていること</dt>
+                  <dd>チーム内の密なコミュニケーション。</dd>
+                  <dt>好きな言葉</dt>
+                  <dd>神は細部に宿る</dd>
+                </dl>
+              </div>
             </div>
           </div>
         </div>
