@@ -1,0 +1,472 @@
+:root {
+  --bg-color: #f0f0f3; /* 清潔感のあるオフホワイト */
+  --text-color: #555555;
+  --heading-color: #333333;
+  --shadow-light: #ffffff;
+  --shadow-dark: #cbced1;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  /* ABOUTクリック時のスムーズなスクロールを実現 */
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  font-family:
+    "Helvetica Neue", Arial, "Hiragino Kaku Gothic ProN", "Hiragino Sans",
+    Meiryo, sans-serif;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+rt {
+  font-size: 0.4em;
+  color: var(--text-color);
+}
+
+/* =========================================
+       ヘッダー ＆ ハンバーガーメニュー
+       ========================================= */
+header {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  height: 80px;
+  padding: 0 5%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 1000;
+  background-color: rgba(240, 240, 243, 0.6);
+  backdrop-filter: blur(8px); /* スクロール時の背景ぼかし */
+}
+
+header h1 {
+  color: var(--heading-color);
+  font-size: 1.5rem;
+  letter-spacing: 2px;
+}
+
+/* ハンバーガーボタン（ニューモーフィズム） */
+.menu-btn {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: var(--bg-color);
+  box-shadow:
+    5px 5px 10px var(--shadow-dark),
+    -5px -5px 10px var(--shadow-light);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  z-index: 1001;
+  transition: all 0.3s ease;
+}
+
+/* ボタンクリック時のへこみアニメーション */
+.menu-btn:active {
+  box-shadow:
+    inset 4px 4px 8px var(--shadow-dark),
+    inset -4px -4px 8px var(--shadow-light);
+}
+
+.menu-btn span {
+  display: block;
+  width: 20px;
+  height: 2px;
+  background-color: var(--heading-color);
+  margin: 2px 0;
+  transition: all 0.3s ease;
+}
+
+/* ハンバーガーメニュー展開時の×印アニメーション */
+.menu-btn.open span:nth-child(1) {
+  transform: translateY(6px) rotate(45deg);
+}
+.menu-btn.open span:nth-child(2) {
+  opacity: 0;
+}
+.menu-btn.open span:nth-child(3) {
+  transform: translateY(-6px) rotate(-45deg);
+}
+
+/* ナビゲーションメニュー */
+nav {
+  position: fixed;
+  top: 0;
+  right: -100%;
+  width: 300px;
+  height: 100vh;
+  background: var(--bg-color);
+  box-shadow: -10px 0 20px rgba(203, 206, 209, 0.5);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  transition: right 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  z-index: 1000;
+}
+
+nav.open {
+  right: 0;
+}
+
+nav ul {
+  list-style: none;
+  text-align: center;
+  width: 100%;
+}
+
+nav ul li {
+  margin: 30px 0;
+}
+
+nav ul li a {
+  text-decoration: none;
+  color: var(--heading-color);
+  font-size: 1.2rem;
+  font-weight: bold;
+  letter-spacing: 2px;
+  padding: 15px 40px;
+  border-radius: 30px;
+  background: var(--bg-color);
+  transition: all 0.3s ease;
+  display: inline-block;
+}
+
+/* リンクホバー・アクティブ時のアニメーション */
+nav ul li a:hover {
+  color: #777;
+}
+nav ul li a:active {
+  box-shadow:
+    inset 4px 4px 8px var(--shadow-dark),
+    inset -4px -4px 8px var(--shadow-light);
+}
+
+/* =========================================
+       メインコンテンツ (4つのセクション)
+       ========================================= */
+main {
+  padding: 120px 20px 60px;
+  max-width: 1200px; /* 画像を入れるために幅を拡大 */
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 100px; /* 行間の余白を広めに */
+}
+/* 1行分のラッパー（画像 + テキスト + 画像） */
+.section-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 40px;
+  width: 100%;
+}
+
+/* サイド画像のスタイル */
+.side-image {
+  width: 200px;
+  height: 500px;
+  object-fit: cover;
+  border-radius: 30px;
+  filter: drop-shadow(6px 6px 10px var(--shadow-dark))
+    drop-shadow(-6px -6px 10px var(--shadow-light));
+
+  transition: transform 0.3s ease;
+}
+
+.side-image:hover {
+  transform: translateY(-5px); /* テキストブロックと同じホバーエフェクト */
+}
+
+.content-section {
+  background: var(--bg-color);
+  padding: 50px 30px;
+  text-align: center; /* 中央揃え */
+  transition: transform 0.3s ease;
+}
+
+.content-section h2 {
+  color: var(--heading-color);
+  font-size: 1.5rem;
+  letter-spacing: 1px;
+}
+
+.content-section p {
+  font-size: 1rem;
+  color: var(--text-color);
+}
+
+.content-section .production-name {
+  font-size: 0.9rem;
+  color: var(--heading-color);
+  letter-spacing: 3px;
+  margin-bottom: 20px;
+}
+
+/* =========================================
+       フッター
+       ========================================= */
+footer {
+  text-align: center;
+  padding: 40px 20px;
+  margin-top: 40px;
+  color: var(--shadow-dark);
+  font-size: 0.9rem;
+}
+
+#about.content-section {
+  border-radius: 30px;
+  padding: 50px 30px;
+  box-shadow:
+    10px 10px 20px inset var(--shadow-dark),
+    -10px -10px 30px inset var(--shadow-light);
+}
+
+/* =========================================
+       人物紹介ページ専用スタイル (プレフィックス: profile-)
+       ========================================= */
+.profile-container {
+  position: relative;
+  width: 100%;
+  max-width: 1200px;
+  padding: 0 80px; /* 矢印ボタン用の余白 */
+  margin: 0 auto;
+}
+
+/* 滑らかな遷移のためのフェードアニメーション用クラス */
+.profile-content {
+  display: flex;
+  gap: 60px;
+  align-items: center;
+  transition:
+    opacity 0.5s ease,
+    transform 0.5s ease;
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.profile-content.fade-out {
+  opacity: 0;
+  transform: translateX(-20px);
+}
+
+/* --- 左側：画像エリア --- */
+.profile-left {
+  position: relative;
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* 背面のテーマカラー（ぼかし光彩） */
+.profile-theme-bg {
+  position: absolute;
+  width: 280px;
+  height: 280px;
+  border-radius: 50%;
+  background-color: var(--theme-color, #a8c0d5); /* デフォルト色 */
+  filter: blur(60px);
+  opacity: 0.6;
+  z-index: 0;
+  transition: background-color 0.5s ease;
+}
+
+/* 人物画像（ニューモーフィズム枠） */
+.profile-img {
+  width: 320px;
+  height: 400px;
+  object-fit: cover;
+  border-radius: 30px;
+  box-shadow:
+    15px 15px 30px var(--shadow-dark),
+    -15px -15px 30px var(--shadow-light);
+  z-index: 1;
+  border: 8px solid var(--bg-color); /* フレーム風の縁取り */
+}
+
+/* --- 右側：情報エリア --- */
+.profile-right {
+  flex: 1.5;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.profile-role {
+  font-size: 1rem;
+  color: #888;
+  letter-spacing: 2px;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+.profile-name {
+  font-size: 3rem;
+  color: var(--heading-color);
+  margin-bottom: 40px;
+  letter-spacing: 2px;
+}
+
+/* 下部2カラム（自己紹介・一問一答） */
+.profile-details {
+  display: flex;
+  gap: 30px;
+}
+
+.profile-card {
+  background: var(--bg-color);
+  border-radius: 20px;
+  padding: 30px;
+  box-shadow:
+    10px 10px 20px var(--shadow-dark),
+    -10px -10px 20px var(--shadow-light);
+  flex: 1;
+}
+
+.profile-card h3 {
+  font-size: 1.1rem;
+  color: var(--heading-color);
+  margin-bottom: 15px;
+  border-bottom: 2px solid rgba(0, 0, 0, 0.05);
+  padding-bottom: 10px;
+}
+
+.profile-card p {
+  font-size: 0.95rem;
+}
+
+/* 一問一答のリストスタイル */
+.profile-qa dl {
+  font-size: 0.95rem;
+}
+.profile-qa dt {
+  font-weight: bold;
+  color: var(--heading-color);
+  margin-top: 10px;
+}
+.profile-qa dt::before {
+  content: "Q. ";
+  color: #a8c0d5; /* アクセントカラー */
+}
+.profile-qa dd {
+  margin-left: 0;
+  margin-bottom: 5px;
+  color: var(--text-color);
+}
+.profile-qa dd::before {
+  content: "A. ";
+  color: #888;
+}
+
+/* --- ナビゲーション矢印 --- */
+.profile-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: var(--bg-color);
+  box-shadow:
+    6px 6px 12px var(--shadow-dark),
+    -6px -6px 12px var(--shadow-light);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  z-index: 10;
+  font-size: 1.2rem;
+  color: var(--heading-color);
+  transition: all 0.3s ease;
+  user-select: none;
+}
+
+.profile-arrow:hover {
+  color: #888;
+}
+
+.profile-arrow:active {
+  box-shadow:
+    inset 4px 4px 8px var(--shadow-dark),
+    inset -4px -4px 8px var(--shadow-light);
+}
+
+.profile-arrow.prev {
+  left: 10px;
+}
+.profile-arrow.next {
+  right: 10px;
+}
+
+/* =========================================
+       レスポンシブ対応 (スマホ向け調整)
+       ========================================= */
+@media (max-width: 900px) {
+  .section-wrapper {
+    flex-direction: column; /* スマホでは縦並びに変更 */
+    gap: 30px;
+  }
+
+  .side-image {
+    width: 100%;
+    max-width: 350px;
+    height: auto;
+    aspect-ratio: 16 / 9; /* スマホ表示時は少し横長にして見やすく */
+  }
+
+  .content-section {
+    padding: 40px 20px;
+    border-radius: 20px;
+    width: 100%;
+    max-width: 100%;
+  }
+
+  nav {
+    width: 100%;
+  }
+
+  .profile-container {
+    padding: 0 20px;
+  }
+  .profile-content {
+    flex-direction: column;
+    gap: 40px;
+  }
+  .profile-img {
+    width: 100%;
+    max-width: 300px;
+    height: auto;
+    aspect-ratio: 3 / 4;
+  }
+  .profile-right {
+    text-align: center; /* スマホ時は中央揃え */
+  }
+  .profile-details {
+    flex-direction: column; /* 2カラムを縦並びに */
+    text-align: left; /* カード内は左寄せに戻す */
+  }
+  .profile-arrow {
+    top: auto;
+    bottom: -80px; /* 画面下部に配置 */
+    transform: translateY(0);
+  }
+  .profile-arrow.prev {
+    left: 20%;
+  }
+  .profile-arrow.next {
+    right: 20%;
+  }
+}
