@@ -237,6 +237,22 @@ footer {
 /* =========================================
        人物紹介ページ専用スタイル (プレフィックス: profile-)
        ========================================= */
+
+.profile-body {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  font-family:
+    "Helvetica Neue", Arial, "Hiragino Kaku Gothic ProN", "Hiragino Sans",
+    Meiryo, sans-serif;
+  line-height: 1.6;
+  overflow-x: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding: 40px 0;
+}
+
 .profile-container {
   position: relative;
   width: 100%;
