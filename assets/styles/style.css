@@ -342,6 +342,25 @@ footer {
   letter-spacing: 2px;
 }
 
+.profile-name-romaji {
+  font-size: 2rem;
+  margin-left: 30px;
+  color: #888;
+  letter-spacing: 2px;
+}
+
+.profile-name-wrapper {
+  display: flex;
+  align-items: baseline;
+}
+
+.profile-name-w {
+  font-size: 2rem;
+  margin-left: 3px;
+  color: #888;
+  letter-spacing: 2px;
+}
+
 /* 下部2カラム（自己紹介・一問一答） */
 .profile-details {
   display: flex;

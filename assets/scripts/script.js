@@ -26,6 +26,7 @@ const profiles = [
   {
     id: 0,
     name: "野口 えゆ",
+    nameRomaji: "Noguchi Eyu",
     role: "日本ウオ",
     img: "../assets/images/noguchi2.png",
     theme: "#d5a8bd",
@@ -46,6 +47,7 @@ const profiles = [
   {
     id: 1,
     name: "原 裕也",
+    nameRomaji: "Hara Yuuya",
     role: "日本ウオ",
     img: "../assets/images/hara2.png",
     theme: "#f4e39b",
@@ -66,6 +68,7 @@ const profiles = [
   {
     id: 2,
     name: "石出",
+    nameRomaji: "Ishide",
     role: "おっとっと",
     img: "../assets/images/ishide2.png",
     theme: "#a3c9e8",
@@ -89,6 +92,7 @@ const profiles = [
   {
     id: 3,
     name: "河田 イガラシ",
+    nameRomaji: "Kawata Igarashi",
     role: "おっとっと",
     img: "../assets/images/kawata2.png",
     theme: "#afd69e",
@@ -112,6 +116,7 @@ const profiles = [
   {
     id: 4,
     name: "ミサキ",
+    nameRomaji: "Misaki",
     role: "ユウシュウのビ",
     img: "../assets/images/misaki2.png",
     theme: "#cbb4de",
@@ -135,6 +140,7 @@ const profiles = [
   {
     id: 5,
     name: "信",
+    nameRomaji: "Shin",
     role: "ユウシュウのビ",
     img: "../assets/images/shin2.png",
     theme: "#cdb68c",
@@ -158,6 +164,7 @@ const profiles = [
   {
     id: 6,
     name: "田中 交子",
+    nameRomaji: "Tanaka Kouko",
     role: "ダダダ田",
     img: "../assets/images/tanaka2.png",
     theme: "#cd8f8c",
@@ -181,6 +188,7 @@ const profiles = [
   {
     id: 7,
     name: "山田 数",
+    nameRomaji: "Yamada Suu",
     role: "ダダダ田",
     img: "../assets/images/yamada2.png",
     theme: "#a4a4a4",
@@ -204,6 +212,7 @@ const profiles = [
   {
     id: 8,
     name: "文尾 綾夢菜",
+    nameRomaji: "Bunbi Ayuna",
     role: "耄碌パソコン研究会",
     img: "../assets/images/bunbi2.png",
     theme: "#cd8cc5",
@@ -226,6 +235,7 @@ const profiles = [
   {
     id: 5,
     name: "おぶ",
+    nameRomaji: "Obu",
     role: "耄碌パソコン研究会",
     img: "../assets/images/hikawa2.png",
     theme: "#9fc8cf",
@@ -254,6 +264,7 @@ const elTheme = document.getElementById("theme-bg");
 const elImg = document.getElementById("profile-img");
 const elRole = document.getElementById("profile-role");
 const elName = document.getElementById("profile-name");
+const elNameRomaji = document.getElementById("profile-name-romaji");
 const elIntro = document.getElementById("profile-intro");
 const elQa = document.getElementById("profile-qa-list");
 
@@ -265,6 +276,7 @@ if (
   elImg &&
   elRole &&
   elName &&
+  elNameRomaji &&
   elIntro &&
   elQa
 ) {
@@ -355,6 +367,7 @@ if (
     elImg.src = p.img;
     elRole.textContent = p.role;
     elName.textContent = p.name;
+    elNameRomaji.textContent = p.nameRomaji;
     elIntro.textContent = p.intro;
     elQa.innerHTML = "";
     p.qa.forEach((item) => {
