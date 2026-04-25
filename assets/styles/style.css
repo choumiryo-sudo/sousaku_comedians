@@ -55,6 +55,18 @@ header h1 {
   letter-spacing: 2px;
 }
 
+.header-title {
+  text-decoration: none;
+  color: var(--heading-color);
+  transition: color 0.3s ease;
+}
+
+.header-title:visited {
+  text-decoration: none;
+  color: var(--heading-color);
+  transition: color 0.3s ease;
+}
+
 /* ハンバーガーボタン（ニューモーフィズム） */
 .menu-btn {
   width: 50px;
