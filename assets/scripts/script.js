@@ -233,7 +233,7 @@ const profiles = [
     ],
   },
   {
-    id: 5,
+    id: 9,
     name: "おぶ",
     nameRomaji: "Obu",
     role: "耄碌パソコン研究会",
