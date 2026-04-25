@@ -29,7 +29,7 @@ const profiles = [
     nameRomaji: "Noguchi Eyu",
     role: "日本ウオ",
     img: "../assets/images/noguchi2.png",
-    theme: "#d5a8bd",
+    theme: "#f2b5d2",
     stats: [100, 80, 60, 80, 100],
     intro:
       "元気いっぱいムードメーカー。自他ともに認める可愛い顔がチャームポイント。よく女子に間違われるが、中身は結構男。関西弁。",
@@ -50,7 +50,7 @@ const profiles = [
     nameRomaji: "Hara Yuuya",
     role: "日本ウオ",
     img: "../assets/images/hara2.png",
-    theme: "#f4e39b",
+    theme: "#f1dc7b",
     stats: [100, 70, 50, 60, 90],
     intro:
       "態度も口も悪い小さきチンピラ。平常心の状態からノータイムでブチギレまで持っていける。対人関係は舐められるか嫌われるかの二択。関西弁。",
@@ -95,7 +95,7 @@ const profiles = [
     nameRomaji: "Kawata Igarashi",
     role: "おっとっと",
     img: "../assets/images/kawata2.png",
-    theme: "#afd69e",
+    theme: "#afcca3",
     stats: [80, 80, 70, 70, 20],
     intro:
       "自由奔放な変人。いつもうっすらニヤついている。父が二人おり、どちらも大企業の重役。ボンボン。英・中・仏語が話せる。元子役。",
@@ -285,7 +285,7 @@ const profiles = [
     nameRomaji: "Ehara",
     role: "トリリオン",
     img: "../assets/images/ehara2.png",
-    theme: "#ba737a",
+    theme: "#c9999e",
     stats: [30, 90, 50, 80, 50],
     intro:
       "ナチュラルボーンお嬢様。飾り気なく明るい性格。基本的に常識人だが、時々世間知らずが露呈する。著名な建築家の父と、手芸作家の母を持つ。",
@@ -309,7 +309,7 @@ const profiles = [
     nameRomaji: "Kutsu",
     role: "トリリオン",
     img: "../assets/images/kutsu2.png",
-    theme: "#cfedfe",
+    theme: "#bde2f8",
     stats: [20, 90, 70, 60, 30],
     intro:
       "いつもふにゃっとしている。何を考えているか分からないとよく言われる。かなりの天然。猫っ毛と大きな口がチャームポイント。",
@@ -333,7 +333,7 @@ const profiles = [
     nameRomaji: "Inoue 100 En Shop",
     role: "　",
     img: "../assets/images/inoue2.png",
-    theme: "#a3a3a3",
+    theme: "#bea07b",
     stats: [50, 60, 95, 80, 95],
     intro:
       "サバサバした姉御肌。優しくはないが面倒見は良い。奈良弁をベースに色々な方言が混ざる。芸名を考える時たまたま100円ショップに居たのでこの名前。",

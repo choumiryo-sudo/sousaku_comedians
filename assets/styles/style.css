@@ -182,12 +182,20 @@ main {
   border-radius: 30px;
   filter: drop-shadow(6px 6px 10px var(--shadow-dark))
     drop-shadow(-6px -6px 10px var(--shadow-light));
-
   transition: transform 0.3s ease;
 }
 
 .side-image:hover {
   transform: translateY(-5px); /* テキストブロックと同じホバーエフェクト */
+}
+
+.side-image-center {
+  margin-left: -180px;
+  margin-bottom: -20px;
+}
+
+.side-image-left {
+  margin-left: -50px;
 }
 
 .content-section {
