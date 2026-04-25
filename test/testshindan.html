@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <title>性格診断</title>
+    <style>
+      body {
+        font-family: sans-serif;
+        text-align: center;
+        margin-top: 50px;
+      }
+
+      .question {
+        font-size: 20px;
+        margin-bottom: 20px;
+      }
+
+      button {
+        padding: 10px 20px;
+        margin: 10px;
+        font-size: 16px;
+        cursor: pointer;
+      }
+
+      #result {
+        font-size: 24px;
+        margin-top: 30px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app">
+      <div class="question" id="question"></div>
+      <div id="choices">
+        <button id="btnA" onclick="answer('A')"></button>
+        <button id="btnB" onclick="answer('B')"></button>
+      </div>
+      <div id="result"></div>
+    </div>
+
+    <script>
+      const questions = [
+        {
+          text: "質問1：休日は何して過ごす？",
+          A: "友達と遊ぶ（E）",
+          B: "家で休む（I）",
+        },
+        {
+          text: "質問2：道に迷った時、どうする？",
+          A: "まず調べる（S）",
+          B: "勘を頼りにする（N）",
+        },
+        {
+          text: "質問3：友達が落ち込んでたら？",
+          A: "解決法を考える（T）",
+          B: "まずは寄り添う（F）",
+        },
+        {
+          text: "質問4：夏休みの宿題は？",
+          A: "計画的に進める（J）",
+          B: "なんとかなるでしょ！（P）",
+        },
+        {
+          text: "質問5：あなたは？",
+          A: "ボケ気質（個性的）",
+          B: "ツッコミ気質（常識人）",
+        },
+      ];
+
+      const results = {
+        AAAAA: "タイプ1: ESTJ(個性的) 井上",
+        AAAAB: "タイプ2: ESTJ(常識人) 髙畑",
+        AAABA: "タイプ3: ESTP(個性的) 田中",
+        AAABB: "タイプ4: ESTP(常識人) 石出",
+        AABAA: "タイプ5: ESFJ(個性的) 田中",
+        AABAB: "タイプ6: ESFJ(常識人) 牧",
+        AABBA: "タイプ7: ESFP(個性的) 野口",
+        AABBB: "タイプ8: ESFP(常識人) 野口",
+        ABAAA: "タイプ9: ENTJ(個性的) 泉たいが",
+        ABAAB: "タイプ10: ENTJ(常識人) 井上",
+        ABABA: "タイプ11: ENTP(個性的) 河田",
+        ABABB: "タイプ12: ENTP(常識人) 秋尾",
+        ABBAA: "タイプ13: ENFJ(個性的) 河田",
+        ABBAB: "タイプ14: ENFJ(常識人) 榎原",
+        ABBBA: "タイプ15: ENFP(個性的) 岩川",
+        ABBBB: "タイプ16: ENFP(常識人) 野口",
+        BAAAA: "タイプ17: ISTJ(個性的) ミサキ",
+        BAAAB: "タイプ18: ISTJ(常識人) 平山",
+        BAABA: "タイプ19: ISTP(個性的) ミサキ",
+        BAABB: "タイプ20: ISTP(常識人) 山田",
+        BABAA: "タイプ21: ISFJ(個性的) 沓",
+        BABAB: "タイプ22: ISFJ(常識人) 石出",
+        BABBA: "タイプ23: ISFP(個性的) 千田",
+        BABBB: "タイプ24: ISFP(常識人) 松山",
+        BBAAA: "タイプ25: INTJ(個性的) 泉志保",
+        BBAAB: "タイプ26: INTJ(常識人) 樋川",
+        BBABA: "タイプ27: INTP(個性的) 田中",
+        BBABB: "タイプ28: INTP(常識人) 原",
+        BBBAA: "タイプ29: INFJ(個性的) 榎原",
+        BBBAB: "タイプ30: INFJ(常識人) 信",
+        BBBBA: "タイプ31: INFP(個性的) 文尾",
+        BBBBB: "タイプ32: INFP(常識人) 信",
+      };
+
+      let currentIndex = 0;
+      let answers = "";
+
+      function showQuestion() {
+        const q = questions[currentIndex];
+
+        document.getElementById("question").textContent = q.text;
+        document.getElementById("btnA").textContent = q.A;
+        document.getElementById("btnB").textContent = q.B;
+      }
+
+      function answer(choice) {
+        answers += choice;
+        currentIndex++;
+
+        if (currentIndex < questions.length) {
+          showQuestion();
+        } else {
+          showResult();
+        }
+      }
+
+      function showResult() {
+        document.getElementById("choices").style.display = "none";
+        document.getElementById("question").textContent = "診断結果";
+
+        const resultText = results[answers] || "未定義のパターンです";
+
+        document.getElementById("result").textContent =
+          `${resultText}（回答: ${answers}）`;
+      }
+
+      showQuestion();
+    </script>
+  </body>
+</html>
