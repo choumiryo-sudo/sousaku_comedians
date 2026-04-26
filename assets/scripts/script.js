@@ -519,28 +519,28 @@ if (
 const questions = [
   {
     text: "質問1：休日は何して過ごす？",
-    A: "友達と遊ぶ（E）",
-    B: "家で休む（I）",
+    A: "友達と遊ぶ",
+    B: "家で休む",
   },
   {
     text: "質問2：道に迷った時、どうする？",
-    A: "まず調べる（S）",
-    B: "勘を頼りにする（N）",
+    A: "まず調べる",
+    B: "勘を頼りにする",
   },
   {
     text: "質問3：友達が落ち込んでたら？",
-    A: "解決法を考える（T）",
-    B: "まずは寄り添う（F）",
+    A: "解決法を考える",
+    B: "まずは寄り添う",
   },
   {
     text: "質問4：夏休みの宿題は？",
-    A: "計画的に進める（J）",
-    B: "なんとかなるでしょ！（P）",
+    A: "計画的に進める",
+    B: "なんとかなるでしょ！",
   },
   {
     text: "質問5：あなたは？",
-    A: "ボケ気質（個性的）",
-    B: "ツッコミ気質（常識人）",
+    A: "ボケ気質",
+    B: "ツッコミ気質",
   },
 ];
 
@@ -779,7 +779,7 @@ function showResult() {
     document.getElementById("result-title").innerHTML =
       'あなたと相性がいいのは……<br><span class="result-title-name">' +
       data.title +
-      "</span>かも？";
+      "</span> かも？";
     document.getElementById("result-img").src = data.img;
     document.getElementById("result-desc").textContent = data.desc;
     document.getElementById("result-link").href =
