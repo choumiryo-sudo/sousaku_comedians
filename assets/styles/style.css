@@ -578,15 +578,15 @@ body.shindan {
   font-weight: bold;
 }
 
-.choice-btn:hover {
-  color: #777;
-  transform: translateY(-2px);
-}
 .choice-btn:active {
   box-shadow:
     inset 4px 4px 8px var(--shadow-dark),
     inset -4px -4px 8px var(--shadow-light);
   transform: translateY(0);
+}
+
+.choice-btn:hover {
+  color: #888;
 }
 
 #result-area {
@@ -638,12 +638,10 @@ body.shindan {
   transition: all 0.3s ease;
 }
 
-.link-btn:hover {
-  background-color: #555;
-  transform: translateY(-3px);
-}
 .link-btn:active {
-  transform: translateY(0);
+  box-shadow:
+    inset 4px 4px 8px var(--shadow-dark),
+    inset -4px -4px 8px var(--shadow-light);
 }
 
 /* =========================================
