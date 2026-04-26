@@ -514,6 +514,8 @@ if (
   });
 }
 
+//ここから下はshindan.htmlで使用するデータ構造です。
+
 const questions = [
   {
     text: "質問1：休日は何して過ごす？",
@@ -542,79 +544,204 @@ const questions = [
   },
 ];
 
-const results = {
-  AAAAA: "タイプ1: ESTJ(個性的)",
-  AAAAB: "タイプ2: ESTJ(常識人)",
-  AAABA: "タイプ3: ESTP(個性的)",
-  AAABB: "タイプ4: ESTP(常識人)",
-  AABAA: "タイプ5: ESFJ(個性的)",
-  AABAB: "タイプ6: ESFJ(常識人)",
-  AABBA: "タイプ7: ESFP(個性的)",
-  AABBB: "タイプ8: ESFP(常識人)",
-  ABAAA: "タイプ9: ENTJ(個性的)",
-  ABAAB: "タイプ10: ENTJ(常識人)",
-  ABABA: "タイプ11: ENTP(個性的)",
-  ABABB: "タイプ12: ENTP(常識人)",
-  ABBAA: "タイプ13: ENFJ(個性的)",
-  ABBAB: "タイプ14: ENFJ(常識人)",
-  ABBBA: "タイプ15: ENFP(個性的)",
-  ABBBB: "タイプ16: ENFP(常識人)",
-  BAAAA: "タイプ17: ISTJ(個性的)",
-  BAAAB: "タイプ18: ISTJ(常識人)",
-  BAABA: "タイプ19: ISTP(個性的)",
-  BAABB: "タイプ20: ISTP(常識人)",
-  BABAA: "タイプ21: ISFJ(個性的)",
-  BABAB: "タイプ22: ISFJ(常識人)",
-  BABBA: "タイプ23: ISFP(個性的)",
-  BABBB: "タイプ24: ISFP(常識人)",
-  BBAAA: "タイプ25: INTJ(個性的)",
-  BBAAB: "タイプ26: INTJ(常識人)",
-  BBABA: "タイプ27: INTP(個性的)",
-  BBABB: "タイプ28: INTP(常識人)",
-  BBBAA: "タイプ29: INFJ(個性的)",
-  BBBAB: "タイプ30: INFJ(常識人)",
-  BBBBA: "タイプ31: INFP(個性的)",
-  BBBBB: "タイプ32: INFP(常識人)",
-};
+// 変更点: 以前の results と profileMapping を統合し、
+// 「タイトル」「人物ID」「画像URL」「説明文」を32パターン個別に手動登録できるデータ構造（resultData）に変更しました。
+const resultData = {
+  AAAAA: {
+    title: "タイプ1: ESTJ(個性的)",
+    profileId: 1,
+    img: "https://picsum.photos/400/400?random=1",
+    desc: "タイプ1専用の説明文です。自由に書き換えてください。",
+  },
+  AAAAB: {
+    title: "タイプ2: ESTJ(常識人)",
+    profileId: 7,
+    img: "https://picsum.photos/400/400?random=2",
+    desc: "タイプ2専用の説明文です。自由に書き換えてください。",
+  },
+  AAABA: {
+    title: "タイプ3: ESTP(個性的)",
+    profileId: 3,
+    img: "https://picsum.photos/400/400?random=3",
+    desc: "タイプ3専用の説明文です。自由に書き換えてください。",
+  },
+  AAABB: {
+    title: "タイプ4: ESTP(常識人)",
+    profileId: 0,
+    img: "https://picsum.photos/400/400?random=4",
+    desc: "タイプ4専用の説明文です。自由に書き換えてください。",
+  },
+  AABAA: {
+    title: "タイプ5: ESFJ(個性的)",
+    profileId: 4,
+    img: "https://picsum.photos/400/400?random=5",
+    desc: "タイプ5専用の説明文です。自由に書き換えてください。",
+  },
+  AABAB: {
+    title: "タイプ6: ESFJ(常識人)",
+    profileId: 2,
+    img: "https://picsum.photos/400/400?random=6",
+    desc: "タイプ6専用の説明文です。自由に書き換えてください。",
+  },
+  AABBA: {
+    title: "タイプ7: ESFP(個性的)",
+    profileId: 5,
+    img: "https://picsum.photos/400/400?random=7",
+    desc: "タイプ7専用の説明文です。自由に書き換えてください。",
+  },
+  AABBB: {
+    title: "タイプ8: ESFP(常識人)",
+    profileId: 6,
+    img: "https://picsum.photos/400/400?random=8",
+    desc: "タイプ8専用の説明文です。自由に書き換えてください。",
+  },
 
-// 変更点: 回答パターンごとに、飛ばしたい人物の profileId (0〜7など) を手動で指定するマッピングリスト
-// ※今は適当な数字を入れています。後からお好きなように右側の数値を書き換えてください。
-const profileMapping = {
-  AAAAA: 1, // タイプ1: ESTJ(個性的)
-  AAAAB: 7, // タイプ2: ESTJ(常識人)
-  AAABA: 3, // タイプ3: ESTP(個性的)
-  AAABB: 0, // タイプ4: ESTP(常識人)
-  AABAA: 4, // タイプ5: ESFJ(個性的)
-  AABAB: 2, // タイプ6: ESFJ(常識人)
-  AABBA: 5, // タイプ7: ESFP(個性的)
-  AABBB: 6, // タイプ8: ESFP(常識人)
+  ABAAA: {
+    title: "タイプ9: ENTJ(個性的)",
+    profileId: 1,
+    img: "https://picsum.photos/400/400?random=9",
+    desc: "タイプ9専用の説明文です。自由に書き換えてください。",
+  },
+  ABAAB: {
+    title: "タイプ10: ENTJ(常識人)",
+    profileId: 0,
+    img: "https://picsum.photos/400/400?random=10",
+    desc: "タイプ10専用の説明文です。自由に書き換えてください。",
+  },
+  ABABA: {
+    title: "タイプ11: ENTP(個性的)",
+    profileId: 2,
+    img: "https://picsum.photos/400/400?random=11",
+    desc: "タイプ11専用の説明文です。自由に書き換えてください。",
+  },
+  ABABB: {
+    title: "タイプ12: ENTP(常識人)",
+    profileId: 3,
+    img: "https://picsum.photos/400/400?random=12",
+    desc: "タイプ12専用の説明文です。自由に書き換えてください。",
+  },
+  ABBAA: {
+    title: "タイプ13: ENFJ(個性的)",
+    profileId: 4,
+    img: "https://picsum.photos/400/400?random=13",
+    desc: "タイプ13専用の説明文です。自由に書き換えてください。",
+  },
+  ABBAB: {
+    title: "タイプ14: ENFJ(常識人)",
+    profileId: 5,
+    img: "https://picsum.photos/400/400?random=14",
+    desc: "タイプ14専用の説明文です。自由に書き換えてください。",
+  },
+  ABBBA: {
+    title: "タイプ15: ENFP(個性的)",
+    profileId: 6,
+    img: "https://picsum.photos/400/400?random=15",
+    desc: "タイプ15専用の説明文です。自由に書き換えてください。",
+  },
+  ABBBB: {
+    title: "タイプ16: ENFP(常識人)",
+    profileId: 7,
+    img: "https://picsum.photos/400/400?random=16",
+    desc: "タイプ16専用の説明文です。自由に書き換えてください。",
+  },
 
-  ABAAA: 1, // タイプ9: ENTJ(個性的)
-  ABAAB: 0, // タイプ10: ENTJ(常識人)
-  ABABA: 2, // タイプ11: ENTP(個性的)
-  ABABB: 3, // タイプ12: ENTP(常識人)
-  ABBAA: 4, // タイプ13: ENFJ(個性的)
-  ABBAB: 5, // タイプ14: ENFJ(常識人)
-  ABBBA: 6, // タイプ15: ENFP(個性的)
-  ABBBB: 7, // タイプ16: ENFP(常識人)
+  BAAAA: {
+    title: "タイプ17: ISTJ(個性的)",
+    profileId: 0,
+    img: "https://picsum.photos/400/400?random=17",
+    desc: "タイプ17専用の説明文です。自由に書き換えてください。",
+  },
+  BAAAB: {
+    title: "タイプ18: ISTJ(常識人)",
+    profileId: 1,
+    img: "https://picsum.photos/400/400?random=18",
+    desc: "タイプ18専用の説明文です。自由に書き換えてください。",
+  },
+  BAABA: {
+    title: "タイプ19: ISTP(個性的)",
+    profileId: 2,
+    img: "https://picsum.photos/400/400?random=19",
+    desc: "タイプ19専用の説明文です。自由に書き換えてください。",
+  },
+  BAABB: {
+    title: "タイプ20: ISTP(常識人)",
+    profileId: 3,
+    img: "https://picsum.photos/400/400?random=20",
+    desc: "タイプ20専用の説明文です。自由に書き換えてください。",
+  },
+  BABAA: {
+    title: "タイプ21: ISFJ(個性的)",
+    profileId: 4,
+    img: "https://picsum.photos/400/400?random=21",
+    desc: "タイプ21専用の説明文です。自由に書き換えてください。",
+  },
+  BABAB: {
+    title: "タイプ22: ISFJ(常識人)",
+    profileId: 5,
+    img: "https://picsum.photos/400/400?random=22",
+    desc: "タイプ22専用の説明文です。自由に書き換えてください。",
+  },
+  BABBA: {
+    title: "タイプ23: ISFP(個性的)",
+    profileId: 6,
+    img: "https://picsum.photos/400/400?random=23",
+    desc: "タイプ23専用の説明文です。自由に書き換えてください。",
+  },
+  BABBB: {
+    title: "タイプ24: ISFP(常識人)",
+    profileId: 7,
+    img: "https://picsum.photos/400/400?random=24",
+    desc: "タイプ24専用の説明文です。自由に書き換えてください。",
+  },
 
-  BAAAA: 0, // タイプ17: ISTJ(個性的)
-  BAAAB: 1, // タイプ18: ISTJ(常識人)
-  BAABA: 2, // タイプ19: ISTP(個性的)
-  BAABB: 3, // タイプ20: ISTP(常識人)
-  BABAA: 4, // タイプ21: ISFJ(個性的)
-  BABAB: 5, // タイプ22: ISFJ(常識人)
-  BABBA: 6, // タイプ23: ISFP(個性的)
-  BABBB: 7, // タイプ24: ISFP(常識人)
-
-  BBAAA: 1, // タイプ25: INTJ(個性的)
-  BBAAB: 2, // タイプ26: INTJ(常識人)
-  BBABA: 3, // タイプ27: INTP(個性的)
-  BBABB: 4, // タイプ28: INTP(常識人)
-  BBBAA: 5, // タイプ29: INFJ(個性的)
-  BBBAB: 6, // タイプ30: INFJ(常識人)
-  BBBBA: 7, // タイプ31: INFP(個性的)
-  BBBBB: 0, // タイプ32: INFP(常識人)
+  BBAAA: {
+    title: "タイプ25: INTJ(個性的)",
+    profileId: 1,
+    img: "https://picsum.photos/400/400?random=25",
+    desc: "タイプ25専用の説明文です。自由に書き換えてください。",
+  },
+  BBAAB: {
+    title: "タイプ26: INTJ(常識人)",
+    profileId: 2,
+    img: "https://picsum.photos/400/400?random=26",
+    desc: "タイプ26専用の説明文です。自由に書き換えてください。",
+  },
+  BBABA: {
+    title: "タイプ27: INTP(個性的)",
+    profileId: 3,
+    img: "https://picsum.photos/400/400?random=27",
+    desc: "タイプ27専用の説明文です。自由に書き換えてください。",
+  },
+  BBABB: {
+    title: "タイプ28: INTP(常識人)",
+    profileId: 4,
+    img: "https://picsum.photos/400/400?random=28",
+    desc: "タイプ28専用の説明文です。自由に書き換えてください。",
+  },
+  BBBAA: {
+    title: "タイプ29: INFJ(個性的)",
+    profileId: 5,
+    img: "https://picsum.photos/400/400?random=29",
+    desc: "タイプ29専用の説明文です。自由に書き換えてください。",
+  },
+  BBBAB: {
+    title: "タイプ30: INFJ(常識人)",
+    profileId: 6,
+    img: "https://picsum.photos/400/400?random=30",
+    desc: "タイプ30専用の説明文です。自由に書き換えてください。",
+  },
+  BBBBA: {
+    title: "タイプ31: INFP(個性的)",
+    profileId: 7,
+    img: "https://picsum.photos/400/400?random=31",
+    desc: "タイプ31専用の説明文です。自由に書き換えてください。",
+  },
+  BBBBB: {
+    title: "タイプ32: INFP(常識人)",
+    profileId: 0,
+    img: "https://picsum.photos/400/400?random=32",
+    desc: "タイプ32専用の説明文です。自由に書き換えてください。",
+  },
 };
 
 let currentIndex = 0;
@@ -644,27 +771,24 @@ function showResult() {
   document.getElementById("quiz-area").style.display = "none";
   document.getElementById("result-area").style.display = "block";
 
-  const resultText = results[answers] || "未定義のパターンです";
-  document.getElementById("result-title").textContent = resultText;
+  // 変更点: 回答パターン（例: "AAAAA"）をキーにして、resultData から登録情報を丸ごと取得します
+  const data = resultData[answers];
 
-  const keys = Object.keys(results);
-  const resultIndex = keys.indexOf(answers);
-
-  // 変更点: 計算式を廃止し、上で定義した profileMapping から手動設定したIDを取得するようにしました
-  // ※万が一マッピングが見つからない場合の安全対策として、デフォルトで 0 をセットします
-  const profileId =
-    profileMapping[answers] !== undefined ? profileMapping[answers] : 0;
-
-  // ダミー写真の設定
-  const resultImgUrl = `https://picsum.photos/400/400?random=${resultIndex + 20}`;
-  document.getElementById("result-img").src = resultImgUrl;
-
-  // ダミー説明文の設定
-  const description = `あなたは「${resultText}」の持ち主です。独自の視点を持ちつつも、状況に応じて柔軟に対応できるバランス感覚が特徴です。チームの中では頼りになる存在として重宝されるでしょう。`;
-  document.getElementById("result-desc").textContent = description;
-
-  // 変更点: 取得した profileId を使ってリンク先を生成
-  document.getElementById("result-link").href = `profile.html?id=${profileId}`;
+  // 変更点: 取得したデータが存在すればそれを使い、無ければエラー用の表示を出します
+  if (data) {
+    document.getElementById("result-title").textContent = data.title;
+    document.getElementById("result-img").src = data.img;
+    document.getElementById("result-desc").textContent = data.desc;
+    document.getElementById("result-link").href =
+      `profile.html?id=${data.profileId}`;
+  } else {
+    document.getElementById("result-title").textContent =
+      "未定義のパターンです";
+    document.getElementById("result-img").style.display = "none"; // 画像を隠す
+    document.getElementById("result-desc").textContent =
+      "データが登録されていません。";
+    document.getElementById("result-link").style.display = "none"; // リンクを隠す
+  }
 }
 
 showQuestion();
