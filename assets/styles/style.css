@@ -559,6 +559,10 @@ body.shindan {
   line-height: 1.4;
 }
 
+.result-title-name {
+  font-size: 1.25em;
+}
+
 .choice-btn {
   display: block;
   width: 100%;

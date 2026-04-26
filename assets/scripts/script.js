@@ -776,8 +776,10 @@ function showResult() {
 
   // 変更点: 取得したデータが存在すればそれを使い、無ければエラー用の表示を出します
   if (data) {
-    document.getElementById("result-title").textContent =
-      "あなたと相性がいいのは……" + data.title + "かも？";
+    document.getElementById("result-title").innerHTML =
+      'あなたと相性がいいのは……<br><span class="result-title-name">' +
+      data.title +
+      "</span>かも？";
     document.getElementById("result-img").src = data.img;
     document.getElementById("result-desc").textContent = data.desc;
     document.getElementById("result-link").href =
