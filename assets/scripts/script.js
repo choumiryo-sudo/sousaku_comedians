@@ -783,7 +783,9 @@ function showResult() {
     document.getElementById("result-img").src = data.img;
     document.getElementById("result-desc").textContent = data.desc;
     document.getElementById("result-link").href =
-      `profile.html?id=${data.profileId}`;
+      `../pages/profile.html?id=${data.profileId}`;
+    document.getElementById("result-link").textContent =
+      data.title + "のプロフィールを見る";
   } else {
     document.getElementById("result-title").textContent =
       "未定義のパターンです";

@@ -589,7 +589,8 @@ body.shindan {
   transform: translateY(0);
 }
 
-.choice-btn:hover {
+.choice-btn:hover,
+.link-btn:hover {
   color: #888;
 }
 
