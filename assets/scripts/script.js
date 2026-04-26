@@ -513,3 +513,158 @@ if (
     transitionProfile(currentIndex);
   });
 }
+
+const questions = [
+  {
+    text: "質問1：休日は何して過ごす？",
+    A: "友達と遊ぶ（E）",
+    B: "家で休む（I）",
+  },
+  {
+    text: "質問2：道に迷った時、どうする？",
+    A: "まず調べる（S）",
+    B: "勘を頼りにする（N）",
+  },
+  {
+    text: "質問3：友達が落ち込んでたら？",
+    A: "解決法を考える（T）",
+    B: "まずは寄り添う（F）",
+  },
+  {
+    text: "質問4：夏休みの宿題は？",
+    A: "計画的に進める（J）",
+    B: "なんとかなるでしょ！（P）",
+  },
+  {
+    text: "質問5：あなたは？",
+    A: "ボケ気質（個性的）",
+    B: "ツッコミ気質（常識人）",
+  },
+];
+
+const results = {
+  AAAAA: "タイプ1: ESTJ(個性的)",
+  AAAAB: "タイプ2: ESTJ(常識人)",
+  AAABA: "タイプ3: ESTP(個性的)",
+  AAABB: "タイプ4: ESTP(常識人)",
+  AABAA: "タイプ5: ESFJ(個性的)",
+  AABAB: "タイプ6: ESFJ(常識人)",
+  AABBA: "タイプ7: ESFP(個性的)",
+  AABBB: "タイプ8: ESFP(常識人)",
+  ABAAA: "タイプ9: ENTJ(個性的)",
+  ABAAB: "タイプ10: ENTJ(常識人)",
+  ABABA: "タイプ11: ENTP(個性的)",
+  ABABB: "タイプ12: ENTP(常識人)",
+  ABBAA: "タイプ13: ENFJ(個性的)",
+  ABBAB: "タイプ14: ENFJ(常識人)",
+  ABBBA: "タイプ15: ENFP(個性的)",
+  ABBBB: "タイプ16: ENFP(常識人)",
+  BAAAA: "タイプ17: ISTJ(個性的)",
+  BAAAB: "タイプ18: ISTJ(常識人)",
+  BAABA: "タイプ19: ISTP(個性的)",
+  BAABB: "タイプ20: ISTP(常識人)",
+  BABAA: "タイプ21: ISFJ(個性的)",
+  BABAB: "タイプ22: ISFJ(常識人)",
+  BABBA: "タイプ23: ISFP(個性的)",
+  BABBB: "タイプ24: ISFP(常識人)",
+  BBAAA: "タイプ25: INTJ(個性的)",
+  BBAAB: "タイプ26: INTJ(常識人)",
+  BBABA: "タイプ27: INTP(個性的)",
+  BBABB: "タイプ28: INTP(常識人)",
+  BBBAA: "タイプ29: INFJ(個性的)",
+  BBBAB: "タイプ30: INFJ(常識人)",
+  BBBBA: "タイプ31: INFP(個性的)",
+  BBBBB: "タイプ32: INFP(常識人)",
+};
+
+// 変更点: 回答パターンごとに、飛ばしたい人物の profileId (0〜7など) を手動で指定するマッピングリスト
+// ※今は適当な数字を入れています。後からお好きなように右側の数値を書き換えてください。
+const profileMapping = {
+  AAAAA: 1, // タイプ1: ESTJ(個性的)
+  AAAAB: 7, // タイプ2: ESTJ(常識人)
+  AAABA: 3, // タイプ3: ESTP(個性的)
+  AAABB: 0, // タイプ4: ESTP(常識人)
+  AABAA: 4, // タイプ5: ESFJ(個性的)
+  AABAB: 2, // タイプ6: ESFJ(常識人)
+  AABBA: 5, // タイプ7: ESFP(個性的)
+  AABBB: 6, // タイプ8: ESFP(常識人)
+
+  ABAAA: 1, // タイプ9: ENTJ(個性的)
+  ABAAB: 0, // タイプ10: ENTJ(常識人)
+  ABABA: 2, // タイプ11: ENTP(個性的)
+  ABABB: 3, // タイプ12: ENTP(常識人)
+  ABBAA: 4, // タイプ13: ENFJ(個性的)
+  ABBAB: 5, // タイプ14: ENFJ(常識人)
+  ABBBA: 6, // タイプ15: ENFP(個性的)
+  ABBBB: 7, // タイプ16: ENFP(常識人)
+
+  BAAAA: 0, // タイプ17: ISTJ(個性的)
+  BAAAB: 1, // タイプ18: ISTJ(常識人)
+  BAABA: 2, // タイプ19: ISTP(個性的)
+  BAABB: 3, // タイプ20: ISTP(常識人)
+  BABAA: 4, // タイプ21: ISFJ(個性的)
+  BABAB: 5, // タイプ22: ISFJ(常識人)
+  BABBA: 6, // タイプ23: ISFP(個性的)
+  BABBB: 7, // タイプ24: ISFP(常識人)
+
+  BBAAA: 1, // タイプ25: INTJ(個性的)
+  BBAAB: 2, // タイプ26: INTJ(常識人)
+  BBABA: 3, // タイプ27: INTP(個性的)
+  BBABB: 4, // タイプ28: INTP(常識人)
+  BBBAA: 5, // タイプ29: INFJ(個性的)
+  BBBAB: 6, // タイプ30: INFJ(常識人)
+  BBBBA: 7, // タイプ31: INFP(個性的)
+  BBBBB: 0, // タイプ32: INFP(常識人)
+};
+
+let currentIndex = 0;
+let answers = "";
+
+function showQuestion() {
+  const q = questions[currentIndex];
+  document.getElementById("step-indicator").textContent =
+    `Question ${currentIndex + 1} / ${questions.length}`;
+  document.getElementById("question").textContent = q.text;
+  document.getElementById("btnA").textContent = q.A;
+  document.getElementById("btnB").textContent = q.B;
+}
+
+function answer(choice) {
+  answers += choice;
+  currentIndex++;
+
+  if (currentIndex < questions.length) {
+    showQuestion();
+  } else {
+    showResult();
+  }
+}
+
+function showResult() {
+  document.getElementById("quiz-area").style.display = "none";
+  document.getElementById("result-area").style.display = "block";
+
+  const resultText = results[answers] || "未定義のパターンです";
+  document.getElementById("result-title").textContent = resultText;
+
+  const keys = Object.keys(results);
+  const resultIndex = keys.indexOf(answers);
+
+  // 変更点: 計算式を廃止し、上で定義した profileMapping から手動設定したIDを取得するようにしました
+  // ※万が一マッピングが見つからない場合の安全対策として、デフォルトで 0 をセットします
+  const profileId =
+    profileMapping[answers] !== undefined ? profileMapping[answers] : 0;
+
+  // ダミー写真の設定
+  const resultImgUrl = `https://picsum.photos/400/400?random=${resultIndex + 20}`;
+  document.getElementById("result-img").src = resultImgUrl;
+
+  // ダミー説明文の設定
+  const description = `あなたは「${resultText}」の持ち主です。独自の視点を持ちつつも、状況に応じて柔軟に対応できるバランス感覚が特徴です。チームの中では頼りになる存在として重宝されるでしょう。`;
+  document.getElementById("result-desc").textContent = description;
+
+  // 変更点: 取得した profileId を使ってリンク先を生成
+  document.getElementById("result-link").href = `profile.html?id=${profileId}`;
+}
+
+showQuestion();
