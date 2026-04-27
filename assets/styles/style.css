@@ -654,15 +654,22 @@ body.shindan {
        ========================================= */
 @media (max-width: 900px) {
   .section-wrapper {
-    flex-direction: column; /* スマホでは縦並びに変更 */
+    flex-wrap: wrap;
     gap: 30px;
   }
 
-  .side-image {
-    width: 100%;
-    max-width: 350px;
-    height: auto;
-    aspect-ratio: 16 / 9; /* スマホ表示時は少し横長にして見やすく */
+  .side-image-left-all{
+    order: 1;
+  }
+
+  .side-image-right-all{
+    order: 3;
+  }
+
+  .content-section {
+    order: 2;
+      width: 100%;
+      max-width: 100%;
   }
 
   .content-section {
