@@ -535,9 +535,6 @@ body.shindan {
   background: var(--bg-color);
   border-radius: 30px;
   padding: 50px 40px;
-  box-shadow:
-    15px 15px 30px var(--shadow-dark),
-    -15px -15px 30px var(--shadow-light);
   width: 100%;
   max-width: 600px;
   text-align: center;
