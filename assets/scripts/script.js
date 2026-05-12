@@ -1,22 +1,76 @@
-const menuBtn = document.getElementById("menu-btn");
-const navMenu = document.getElementById("nav-menu");
-const navLinks = document.querySelectorAll(".nav-link");
+const SITE_MODE = {
+  maintenanceEnabled: true,
+  desktopQuery: "(hover: hover) and (pointer: fine) and (min-width: 1024px)",
+  maintenanceMessage: "PCから閲覧してください",
+};
 
-if (menuBtn && navMenu) {
-  // ハンバーガーボタンのクリックイベント
-  menuBtn.addEventListener("click", () => {
-    menuBtn.classList.toggle("open");
-    navMenu.classList.toggle("open");
-  });
+function shouldShowMaintenanceScreen() {
+  if (!SITE_MODE.maintenanceEnabled) {
+    return false;
+  }
 
-  // ナビゲーションのリンクをクリックしたらメニューを閉じる
-  navLinks.forEach((link) => {
-    link.addEventListener("click", () => {
-      menuBtn.classList.remove("open");
-      navMenu.classList.remove("open");
-    });
-  });
+  if (typeof window.matchMedia === "function") {
+    return !window.matchMedia(SITE_MODE.desktopQuery).matches;
+  }
+
+  return window.innerWidth < 1024;
 }
+
+function renderMaintenanceScreen() {
+  document.documentElement.classList.add("maintenance-mode");
+  document.body.classList.add("maintenance-body");
+  
+  const main = document.createElement("main");
+  main.className = "maintenance-screen";
+  main.setAttribute("role", "alert");
+  main.setAttribute("aria-live", "assertive");
+  
+  const section = document.createElement("section");
+  section.className = "maintenance-card";
+  
+  const eyebrow = document.createElement("p");
+  eyebrow.className = "maintenance-eyebrow";
+  eyebrow.textContent = "Maintenance";
+  
+  const h1 = document.createElement("h1");
+  h1.textContent = SITE_MODE.maintenanceMessage;
+  
+  const copy = document.createElement("p");
+  copy.className = "maintenance-copy";
+  copy.textContent = "現在このサイトはPC向け表示のみ公開しています。スマホやタブレットでは閲覧できません。";
+  
+  section.appendChild(eyebrow);
+  section.appendChild(h1);
+  section.appendChild(copy);
+  
+  main.appendChild(section);
+  
+  document.body.innerHTML = "";
+  document.body.appendChild(main);
+}
+
+if (shouldShowMaintenanceScreen()) {
+  renderMaintenanceScreen();
+} else {
+  const menuBtn = document.getElementById("menu-btn");
+  const navMenu = document.getElementById("nav-menu");
+  const navLinks = document.querySelectorAll(".nav-link");
+
+  if (menuBtn && navMenu) {
+    // ハンバーガーボタンのクリックイベント
+    menuBtn.addEventListener("click", () => {
+      menuBtn.classList.toggle("open");
+      navMenu.classList.toggle("open");
+    });
+
+    // ナビゲーションのリンクをクリックしたらメニューを閉じる
+    navLinks.forEach((link) => {
+      link.addEventListener("click", () => {
+        menuBtn.classList.remove("open");
+        navMenu.classList.remove("open");
+      });
+    });
+  }
 
 // 変更点: 一問一答を10行程度にするため、全員の 'qa' データを5問ずつ（QとAで計10行）に増量しました。
 // 自己紹介（intro）の文章量もそれに合わせて少し長めに調整しています。
@@ -464,7 +518,7 @@ if (
     elName.textContent = p.name;
     elNameRomaji.textContent = p.nameRomaji;
     elIntro.textContent = p.intro;
-    elQa.innerHTML = "";
+    elQa.textContent = "";
     p.qa.forEach((item) => {
       const dt = document.createElement("dt");
       dt.textContent = item.q;
@@ -748,12 +802,20 @@ let currentIndex = 0;
 let answers = "";
 
 function showQuestion() {
+  const stepIndicator = document.getElementById("step-indicator");
+  const questionEl = document.getElementById("question");
+  const btnA = document.getElementById("btnA");
+  const btnB = document.getElementById("btnB");
+
+  if (!stepIndicator || !questionEl || !btnA || !btnB) {
+    return;
+  }
+
   const q = questions[currentIndex];
-  document.getElementById("step-indicator").textContent =
-    `Question ${currentIndex + 1} / ${questions.length}`;
-  document.getElementById("question").textContent = q.text;
-  document.getElementById("btnA").textContent = q.A;
-  document.getElementById("btnB").textContent = q.B;
+  stepIndicator.textContent = `Question ${currentIndex + 1} / ${questions.length}`;
+  questionEl.textContent = q.text;
+  btnA.textContent = q.A;
+  btnB.textContent = q.B;
 }
 
 function answer(choice) {
@@ -768,32 +830,56 @@ function answer(choice) {
 }
 
 function showResult() {
-  document.getElementById("quiz-area").style.display = "none";
-  document.getElementById("result-area").style.display = "block";
+  const quizArea = document.getElementById("quiz-area");
+  const resultArea = document.getElementById("result-area");
+  const resultTitle = document.getElementById("result-title");
+  const resultImg = document.getElementById("result-img");
+  const resultDesc = document.getElementById("result-desc");
+  const resultLink = document.getElementById("result-link");
+
+  if (
+    !quizArea ||
+    !resultArea ||
+    !resultTitle ||
+    !resultImg ||
+    !resultDesc ||
+    !resultLink
+  ) {
+    return;
+  }
+
+  quizArea.style.display = "none";
+  resultArea.style.display = "block";
 
   // 変更点: 回答パターン（例: "AAAAA"）をキーにして、resultData から登録情報を丸ごと取得します
   const data = resultData[answers];
 
   // 変更点: 取得したデータが存在すればそれを使い、無ければエラー用の表示を出します
   if (data) {
-    document.getElementById("result-title").innerHTML =
-      'あなたと相性がいいのは……<br><span class="result-title-name">' +
-      data.title +
-      "</span> かも？";
-    document.getElementById("result-img").src = data.img;
-    document.getElementById("result-desc").textContent = data.desc;
-    document.getElementById("result-link").href =
-      `../pages/profile.html?id=${data.profileId}`;
-    document.getElementById("result-link").textContent =
-      data.title + "のプロフィールを見る";
+    resultTitle.textContent = "";
+    const textBefore = document.createTextNode("あなたと相性がいいのは……");
+    const br = document.createElement("br");
+    const span = document.createElement("span");
+    span.className = "result-title-name";
+    span.textContent = data.title;
+    const textAfter = document.createTextNode(" かも？");
+    resultTitle.appendChild(textBefore);
+    resultTitle.appendChild(br);
+    resultTitle.appendChild(span);
+    resultTitle.appendChild(textAfter);
+    resultImg.src = data.img;
+    resultDesc.textContent = data.desc;
+    resultLink.href = `../pages/profile.html?id=${data.profileId}`;
+    resultLink.textContent = data.title + "のプロフィールを見る";
   } else {
-    document.getElementById("result-title").textContent =
-      "未定義のパターンです";
-    document.getElementById("result-img").style.display = "none"; // 画像を隠す
-    document.getElementById("result-desc").textContent =
-      "データが登録されていません。";
-    document.getElementById("result-link").style.display = "none"; // リンクを隠す
+    resultTitle.textContent = "未定義のパターンです";
+    resultImg.style.display = "none"; // 画像を隠す
+    resultDesc.textContent = "データが登録されていません。";
+    resultLink.style.display = "none"; // リンクを隠す
   }
 }
 
-showQuestion();
+if (document.getElementById("quiz-area") && document.getElementById("question")) {
+  showQuestion();
+}
+}

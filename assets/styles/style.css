@@ -28,6 +28,55 @@ body {
   overflow-x: hidden;
 }
 
+body.maintenance-body {
+  min-height: 100vh;
+  overflow: hidden;
+}
+
+.maintenance-screen {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: 32px;
+  background:
+    radial-gradient(circle at top, rgba(168, 192, 213, 0.35), transparent 45%),
+    linear-gradient(180deg, #f6f6f8 0%, #eceff3 100%);
+}
+
+.maintenance-card {
+  width: min(100%, 560px);
+  padding: 40px 28px;
+  border-radius: 28px;
+  text-align: center;
+  background: rgba(255, 255, 255, 0.72);
+  box-shadow:
+    10px 10px 24px rgba(203, 206, 209, 0.55),
+    -10px -10px 24px rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(10px);
+}
+
+.maintenance-eyebrow {
+  margin-bottom: 12px;
+  color: var(--accent-color);
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+}
+
+.maintenance-card h1 {
+  margin-bottom: 16px;
+  color: var(--heading-color);
+  font-size: clamp(1.3rem, 4vw, 2.6rem);
+  line-height: 1.35;
+}
+
+.maintenance-copy {
+  color: var(--text-color);
+  font-size: 0.9rem;
+  line-height: 1.9;
+}
+
 rt {
   font-size: 0.4em;
   color: var(--text-color);
